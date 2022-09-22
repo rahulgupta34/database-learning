@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
     validates :name, :email, presence: true
+    has_many :comments
 
     def self.allUsers
         User.all.order(id: :desc)
