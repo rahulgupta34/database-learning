@@ -1,0 +1,19 @@
+<%= turbo_stream.update "rowData" do %>
+    <% if @users.count > 0 %>
+        <% @users.each do |user| %>
+            <tr>
+                <td>
+                    <%= user.id %>
+                </td>
+                <td>
+                    <%= user.name %>
+                </td>
+                <td>
+                    <%= user.email %>
+                </td>
+            </tr>
+        <% end %>
+    <% else %>
+        <p>No Record Found</p>
+    <% end %>
+<% end %>

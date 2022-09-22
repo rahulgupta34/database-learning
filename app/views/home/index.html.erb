@@ -1,3 +1,60 @@
 <% content_for :title do %>
     <%= "Home" %>
 <% end %>
+<div class="container mt-4" data-controller="hello" data-hello-url-value="/users" data-hello-filter-url-value="<%= filter_path %>">
+    <h1>Users</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Filter
+    </button>
+    <div class="m-3">
+        <span data-hello-target="to"> </span>&nbsp;&nbsp;
+        <span data-hello-target="from"></span>&nbsp;&nbsp;
+        <span data-hello-target="name"></span>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody id="rowData"></tbody>
+    </table>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Filter User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-hello-target="closeDismiss"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>TO</label>
+                        <input type="text" class="form-control" placeholder="Enter User Id" data-hello-target="toID"/>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>From</label>
+                        <input type="text" class="form-control" placeholder="Enter User Id" data-hello-target="fromID"/>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Enter User Name" data-hello-target="nameField"/>
+                    </div>
+
+                    <div class="mt-2">
+                        <button class="btn btn-primary" data-action="click->hello#searchFilter" data-hello-target="loadFilter">Filter</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

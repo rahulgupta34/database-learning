@@ -73,3 +73,5 @@ group :test do
 end
 
 gem 'requestjs-rails'
+
+gem "faker", "~> 2.23"
