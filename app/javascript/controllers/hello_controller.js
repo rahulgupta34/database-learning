@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import { get, post } from "@rails/request.js"
 export default class extends Controller {
 
-  static targets = ["toID","fromID","nameField","closeDismiss","to","from","name","loadFilter"]
+  static targets = ["toID","fromID","nameField","closeDismiss","to","from","name","loadFilter","category","categorySpan"]
 
   static values = {
     url: String,
@@ -26,7 +26,8 @@ export default class extends Controller {
         {
           to: this.toIDTarget.value,
           from: this.fromIDTarget.value,
-          name: this.nameFieldTarget.value
+          name: this.nameFieldTarget.value,
+          category: this.categoryTarget.value
         }
       )
     })
@@ -40,6 +41,9 @@ export default class extends Controller {
       }
       if(this.nameFieldTarget.value != ""){
         this.nameTarget.innerHTML = "<span>Name: " + this.nameFieldTarget.value + "  <button id='closeBtn' data-action='click->hello#removeSearchParams'>X</button></span>"
+      }
+      if(this.categoryTarget.value != ""){
+        this.categorySpanTarget.innerHTML = "<span>Category: " + this.categoryTarget.value + "  <button id='closeBtn' data-action='click->hello#removeSearchParams'>X</button></span>"
       }
     }
   }
@@ -56,6 +60,10 @@ export default class extends Controller {
     }else if(event.target.closest("span").innerText.includes("To")){
       event.target.closest("span").remove()
       this.toIDTarget.value = ""
+      this.loadFilterTarget.click()
+    }else if(event.target.closest("span").innerText.includes("Category")){
+      event.target.closest("span").remove()
+      this.categoryTarget.value = ""
       this.loadFilterTarget.click()
     }else{
       event.target.closest("span").remove()

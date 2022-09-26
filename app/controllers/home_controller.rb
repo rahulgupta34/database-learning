@@ -12,12 +12,19 @@ class HomeController < ApplicationController
 
   def filter
     respond_to do |format|
-      if params[:to].present? && params[:from].present? && params[:name].present?
+      if params[:to].present? && params[:from].present? && params[:name].present? &&
+        params[:category].present?
         format.turbo_stream
-        @users = User.searchAll(params[:to],params[:from],params[:name])
+        @users = User.searchAll(params[:to],params[:from],params[:name]).joins(:category).where("categories.id=?",params[:category])
+      elsif params[:to].present? && params[:from].present? && params[:name].present?
+           format.turbo_stream
+           @users = User.searchAll(params[:to],params[:from],params[:name])
       elsif params[:to].present? && params[:from].present?
-        @users = User.toTOFrom(params[:to],params[:from])
+           @users = User.toTOFrom(params[:to],params[:from])
+           format.turbo_stream
+      else
         format.turbo_stream
+        @users = User.allUsers
       end
     end
   end

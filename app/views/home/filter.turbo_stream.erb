@@ -11,6 +11,9 @@
                 <td>
                     <%= user.email %>
                 </td>
+                <% if params[:category].present? %>
+                    <td><%= user.category.present? ? user.category.name : "Not Available" %></td>
+                <% end %>
             </tr>
         <% end %>
     <% else %>

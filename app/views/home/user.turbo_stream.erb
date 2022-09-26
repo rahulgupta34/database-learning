@@ -1,9 +1,16 @@
 <%= turbo_stream.update "rowData" do %>
     <% @users.each do |user| %>
         <tr>
-          <td> <%= user.id %> </td>
-          <td> <%= user.name %> </td>
-          <td> <%= user.email %> </td>
-        </tr>
+            <td>
+                <%= user.id %>
+            </td>
+            <td>
+                <%= user.name %>
+            </td>
+            <td>
+                <%= user.email %>
+            </td>
+            
+            <td><%= user.category.present? ? user.category.name : "Not Available" %></td>
+        <% end %>
     <% end %>
-<% end %>
